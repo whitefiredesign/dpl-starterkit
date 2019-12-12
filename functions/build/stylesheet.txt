@@ -1,0 +1,2 @@
+Example command
+npm run stylesheet-build -- --theme="{\"colour_primary\":\"#123456\",\"colour_secondary\":\"#654321\"}" --patterns="{\"style\":[\"test\"],\"script\":[\"test\"]}"

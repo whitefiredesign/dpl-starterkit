@@ -1,0 +1,21 @@
+.ftppass
+.sass-cache
+.vagrant
+.idea
+/node_modules/
+npm-debug.log
+*.sublime-project
+*.sublime-workspace
+package-lock.json
+
+# OS generated files #
+######################
+*/.DS_Store
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
