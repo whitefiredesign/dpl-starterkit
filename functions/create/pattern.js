@@ -22,10 +22,13 @@ const templates = {
     "twig" : {
         "replacements": 1,
         "content": "{%% extends \"@templates/base.twig\" %%}\n" +
+            "\n{%% block content %%}" +
             "\n<div class=\"dpl-%(name)s\">\n" +
             "\t<p>{{ pattern_title }}</p>\n" +
             "\t{{ pattern_name }}" +
-            "\n</div>",
+            "\n</div>" +
+            "\n{%% endblock %%}\n",
+
     },
     "js" : {
         "replacements" : 0,
@@ -33,7 +36,7 @@ const templates = {
     },
     "json" : {
         "replacements": 2,
-        "content": "\n{\n\t\"name\": \"%(name)s\", \n\t\"title\": \"%(title)s\" \n}\n"
+        "content": "\n{\n\t\"pattern_name\": \"%(name)s\", \n\t\"pattern_title\": \"%(title)s\" \n}\n"
     }
 };
 
@@ -44,54 +47,54 @@ readline
     .question(`Name for pattern?`,
         (name) => {
 
-        const lcaseName =
-            name.toLowerCase();
+            const lcaseName =
+                name.toLowerCase();
 
-        if(existsSync(patternDir + lcaseName)) {
-            console.log(`${name} already exists.`);
-            readline.close();
-            return false;
-        }
+            if(existsSync(patternDir + lcaseName)) {
+                console.log(`${name} already exists.`);
+                readline.close();
+                return false;
+            }
 
-        console.log(`Creating pattern ${name}...`);
-        mkdirSync(patternDir + lcaseName);
+            console.log(`Creating pattern ${name}...`);
+            mkdirSync(patternDir + lcaseName);
 
-        for(let key in templates) {
-            if (Object.prototype.hasOwnProperty.call(templates, key)) {
+            for(let key in templates) {
+                if (Object.prototype.hasOwnProperty.call(templates, key)) {
 
-                let fileContent =
-                    templates[key].content;
-                if(templates[key].replacements===1) {
-                    fileContent =
-                        sprintf(fileContent, {
-                            name : lcaseName
-                        });
-                }
-                if(templates[key].replacements===2) {
-                    fileContent =
-                        sprintf(fileContent, {
-                            name: lcaseName,
-                            title: name
+                    let fileContent =
+                        templates[key].content;
+                    if(templates[key].replacements===1) {
+                        fileContent =
+                            sprintf(fileContent, {
+                                name : lcaseName
+                            });
+                    }
+                    if(templates[key].replacements===2) {
+                        fileContent =
+                            sprintf(fileContent, {
+                                name: lcaseName,
+                                title: name
+                            })
+                    }
+
+                    const
+                        fileName =
+                            lcaseName + "." + key,
+                        filePath =
+                            patternDir + "/" + lcaseName + "/" + fileName;
+
+                    writeFile(
+                        filePath,
+                        fileContent,
+                        (err) => {
+                            if(err) console.log(err);
+                            readline.close()
                         })
                 }
-
-                const
-                    fileName =
-                        lcaseName + "." + key,
-                    filePath =
-                        patternDir + "/" + lcaseName + "/" + fileName;
-
-                writeFile(
-                    filePath,
-                    fileContent,
-                    (err) => {
-                        if(err) console.log(err);
-                        readline.close()
-                    })
             }
-        }
 
-        console.log(`Pattern ${name} successfully created.`);
+            console.log(`Pattern ${name} successfully created.`);
 
-        readline.close()
-});
+            readline.close()
+        });

@@ -9,19 +9,10 @@ const { readdirSync } = require('fs');
 module.exports = env => {
 
     const rootPath = __dirname;
-    let watch = false,
-        htmlMinify = {
-            collapseWhitespace: true,
-            removeComments: true,
-            removeRedundantAttributes: true,
-            removeScriptTypeAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            useShortDoctype: true
-        };
+    let watch = false;
 
     if(env==="development") {
         watch = true;
-        htmlMinify = false;
     }
 
     const patternsSrcDir = __dirname + "/src/patterns";
@@ -29,16 +20,15 @@ module.exports = env => {
         return new HtmlWebpackPlugin({
             filename: "patterns/" + entryName + '.html',
             template: patternsSrcDir + `/${entryName}/${entryName}.twig`,
-            //minify: htmlMinify,
             inject: true
         });
     });
+
     const indexHtml = new HtmlWebpackPlugin({
-            filename: "./index.html",
-            template: patternsSrcDir + `/../index.twig`,
-            //minify: htmlMinify,
-            inject : true
-        });
+        filename: "./index.html",
+        template: patternsSrcDir + `/../index.twig`,
+        inject : true
+    });
 
     const pagesHtml = Object.assign(patternsHtml, indexHtml);
 
@@ -86,7 +76,7 @@ module.exports = env => {
                             loader : "sass-loader",
                             options: {
                                 sassOptions: {
-                                    includePaths: [path.resolve(__dirname, 'src')],
+                                    includePaths: [__dirname + '/**/*.scss'],
                                     importer: jsonImporter()
                                 }
                             }
