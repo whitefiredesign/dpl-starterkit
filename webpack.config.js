@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin }  = require('clean-webpack-plugin');
 const jsonImporter = require('node-sass-json-importer');
-const { readdirSync } = require('fs');
+const { readdirSync, existsSync } = require('fs');
 
 module.exports = env => {
 
@@ -16,7 +16,7 @@ module.exports = env => {
     }
 
     const patternsSrcDir = __dirname + "/src/patterns";
-    const patternsHtml = readdirSync(patternsSrcDir).map(function(entryName) {
+    const patternsHtml = readdirSync(patternsSrcDir).map(entryName => {
         return new HtmlWebpackPlugin({
             filename: "patterns/" + entryName + '.html',
             template: patternsSrcDir + `/${entryName}/${entryName}.twig`,
@@ -25,12 +25,10 @@ module.exports = env => {
     });
 
     const indexHtml = new HtmlWebpackPlugin({
-        filename: "./index.html",
+        filename: "index.html",
         template: patternsSrcDir + `/../index.twig`,
         inject : true
     });
-
-    const pagesHtml = Object.assign(patternsHtml, indexHtml);
 
     return {
         entry: {main: './src/index.js'},
@@ -91,14 +89,17 @@ module.exports = env => {
                             loader : 'twig-html-loader',
                             options: {
                                 data: (context) => {
-                                    const data =
-                                        path.join(
-                                            context.resourcePath.substr(
-                                                0,
-                                                context.resourcePath.lastIndexOf(".")) + ".json"
-                                        );
-                                    context.addDependency(data);
-                                    return context.fs.readJsonSync(data, { throws: false }) || {};
+                                    const data = path.join(
+                                        context.resourcePath.substr(
+                                            0,
+                                            context.resourcePath.lastIndexOf(".")) + ".json"
+                                    );
+                                    if(existsSync(data)) {
+                                        context.addDependency(data);
+                                        return context.fs.readJsonSync(data, {throws: false}) || {};
+                                    }
+
+                                    return {};
                                 },
                                 namespaces: {
                                     'templates': rootPath + '/src/templates'
@@ -123,6 +124,6 @@ module.exports = env => {
             new webpack.WatchIgnorePlugin([
                 path.join(__dirname, "node_modules")
             ])
-        ].concat(pagesHtml)
+        ].concat(patternsHtml).concat(indexHtml)
     }
 };
