@@ -1,9 +1,10 @@
-# Pattern Library Builder
-#### The purpose of this project is to provide some basic tools to help create and manage design patterns. 
+# Digital Pattern Library Toolkit
 
-## Documentation
+The purpose of this project is to provide some basic tools to help create and manage design patterns. 
 
-### Get started
+# Documentation
+
+## Get started
 
 **Clone the repository**
 
@@ -13,21 +14,21 @@
 
 `npm install`
 
-### Commands
+## Commands
 
-####``npm run dev``
+``npm run dev``
 
 Starts a development server and a watch task.
 
-####``npm run build``
+``npm run build``
 
 Builds the assets and puts them in `/dist`
 
-####``npm run pattern-create``
+``npm run pattern-create``
 
 Generates boilerplate code for a new Design Pattern and adds it to `src/patterns`.
 
-####``npm stylesheet build -- --theme=JSON_STRING --patterns=JSON_STRING``
+``npm stylesheet build -- --theme=JSON_STRING --patterns=JSON_STRING``
 
 Builds the stylesheet.
 
@@ -45,7 +46,7 @@ Builds the stylesheet.
 
 Use both in arguments list. 
 
-### Setup
+## Setup
 #### Enabling Design Patterns
 Add pattern styles and scripts to the build process by referencing them in `src/patterns.json` as an array. 
 
@@ -79,5 +80,9 @@ some-pattern.scss
 .test {
   background:$colour_primary; // var set in theme.json
 }
-
 ````
+
+##Licence
+###The MIT License (MIT)
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
