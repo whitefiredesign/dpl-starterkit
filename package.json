@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/France-Media-Group/digital-pattern-library.git"
+    "url": "https://github.com/whitefiredesign/dpl-starterkit"
   },
   "scripts": {
     "stylesheet-build": "node functions/build/stylesheet.js",

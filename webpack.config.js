@@ -16,19 +16,27 @@ module.exports = env => {
     }
 
     const patternsSrcDir = __dirname + "/src/patterns";
-    const patternsHtml = readdirSync(patternsSrcDir).map(entryName => {
+    const patternsSnippets = readdirSync(patternsSrcDir).map(entryName => {
         return new HtmlWebpackPlugin({
-            filename: "patterns/" + entryName + '.html',
+            filename: "patterns/snippets/" + entryName + '.html',
             template: patternsSrcDir + `/${entryName}/${entryName}.twig`,
+            inject: false
+        });
+    });
+
+    const patternsDocs = readdirSync(patternsSrcDir).map(entryName => {
+        return new HtmlWebpackPlugin({
+            filename: "patterns/docs/" + entryName + '.html',
+            template: patternsSrcDir + `/${entryName}/${entryName}.doc.twig`,
             inject: true
         });
     });
 
     const indexHtml = new HtmlWebpackPlugin({
-        filename: "index.html",
-        template: patternsSrcDir + `/../index.twig`,
-        inject : true
-    });
+            filename: "index.html",
+            template: patternsSrcDir + `/../index.twig`,
+            inject : true
+        });
 
     return {
         entry: {main: './src/index.js'},
@@ -89,11 +97,8 @@ module.exports = env => {
                             loader : 'twig-html-loader',
                             options: {
                                 data: (context) => {
-                                    const data = path.join(
-                                        context.resourcePath.substr(
-                                            0,
-                                            context.resourcePath.lastIndexOf(".")) + ".json"
-                                    );
+                                    const name = context.resourcePath.split('.')[0];
+                                    const data = path.join(name + '.json');
                                     if(existsSync(data)) {
                                         context.addDependency(data);
                                         return context.fs.readJsonSync(data, {throws: false}) || {};
@@ -102,7 +107,8 @@ module.exports = env => {
                                     return {};
                                 },
                                 namespaces: {
-                                    'templates': rootPath + '/src/templates'
+                                    'templates': rootPath + '/src/templates',
+                                    'patterns' : rootPath + '/src/patterns'
                                 }
                             }
                         }
@@ -124,6 +130,9 @@ module.exports = env => {
             new webpack.WatchIgnorePlugin([
                 path.join(__dirname, "node_modules")
             ])
-        ].concat(patternsHtml).concat(indexHtml)
+        ]
+            .concat(patternsSnippets)
+            .concat(patternsDocs)
+            .concat(indexHtml)
     }
 };

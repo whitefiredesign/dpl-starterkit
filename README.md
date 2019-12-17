@@ -82,6 +82,19 @@ some-pattern.scss
 }
 ````
 
+## Files
+- `src/patterns/{pattern}/{pattern}.twig` the raw snippets  (outputs to `dist/patterns/snippets`)
+- `src/patterns/{pattern}/{pattern}.doc.twig` the documentation page containing usage rules and design (outputs to `dist/patterns/docs`)
+- `src/patterns/{pattern}/{pattern}.scss` the stylesheet for the specific pattern
+- `src/patterns/{pattern}/{pattern}.json` data you wish to be passed into the twig files 
+- `src/templates/doc-body.twig` wrapper for the pattern doc page (includes `doc-head` and `doc-foot` by default)
+- `src/templates/doc-head.twig` head of the pattern doc page
+- `src/templates/doc-foot.twig` foot of the pattern doc page
+- `src/base.scss` includes the global base styles
+- `src/index.twig` docs front page (outputs to `dist/index.html`)
+- `src/patterns.json` a way to add / remove pattern assets (JS and CSS)
+- `src/theme.json` branding specific variables to be passed into SASS
+
 ##Licence
 ###The MIT License (MIT)
 

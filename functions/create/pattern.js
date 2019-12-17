@@ -21,14 +21,18 @@ const templates = {
     },
     "twig" : {
         "replacements": 1,
-        "content": "{%% extends \"@templates/base.twig\" %%}\n" +
-            "\n{%% block content %%}" +
-            "\n<div class=\"dpl-%(name)s\">\n" +
+        "content": "<div class=\"dpl-%(name)s\">\n" +
             "\t<p>{{ pattern_title }}</p>\n" +
-            "\t{{ pattern_name }}" +
-            "\n</div>" +
-            "\n{%% endblock %%}\n",
+            "\t{{ pattern_name }}\n" +
+            "</div>\n",
 
+    },
+    "doc.twig" : {
+        "replacements" : 1,
+        "content" : "{%% extends \"@templates/doc-body.twig\" %%}\n" +
+            "{%% block body %%}\n" +
+            "\t{%% include \"@patterns/%(name)s/%(name)s.twig\" %%}\n" +
+            "{%% endblock %%}\n"
     },
     "js" : {
         "replacements" : 0,
@@ -36,7 +40,7 @@ const templates = {
     },
     "json" : {
         "replacements": 2,
-        "content": "\n{\n\t\"pattern_name\": \"%(name)s\", \n\t\"pattern_title\": \"%(title)s\" \n}\n"
+        "content": "{\n\t\"pattern_name\": \"%(name)s\", \n\t\"pattern_title\": \"%(title)s\" \n}\n"
     }
 };
 
