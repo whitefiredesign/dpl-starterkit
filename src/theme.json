@@ -1,10 +1,18 @@
 {
-  "colour_primary_light": "#f50057",
-  "colour_primary_main": "#3f51b5",
-  "colour_primary_dark" : "#303f9f",
-  "colour_secondary_light" : "#ff4081",
-  "colour_secondary_main" : "#f50057",
-  "colour_secondary_dark" : "#c51162",
+  "font_heading" : "Nunito Sans, serif",
+  "font_body" : "Nunito Sans, sans-serif",
+  "font_body_size" : "18px",
+  "font_small_size" : "14px",
+  "font_h1_size" :  "40px",
+  "font_h2_size" : "24px",
+  "font_h3_size" : "22px",
+  "font_h4_size" : "18px",
+  "colour_primary_light": "#93d4f1",
+  "colour_primary_main": "#29aae3",
+  "colour_primary_dark" : "#0f5676",
+  "colour_secondary_light" : "#f58b91",
+  "colour_secondary_main" : "#ed1824",
+  "colour_secondary_dark" : "#79090f",
   "colour_accent" : "#ff375f",
   "colour_grey_dark" : "#616161",
   "colour_grey_light" : "#efefef",
@@ -14,5 +22,6 @@
   "grid_gutter" : "4%",
   "grid_breakpoint_small" : "33.75em",
   "grid_breakpoint_med" : "45em",
-  "grid_breakpoint_large" : "50em"
+  "grid_breakpoint_large" : "50em",
+  "pattern_border_radius" : "3px"
 }

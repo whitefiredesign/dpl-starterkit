@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin }  = require('clean-webpack-plugin');
 const jsonImporter = require('node-sass-json-importer');
 const { readdirSync, existsSync } = require('fs');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = env => {
 
@@ -16,13 +17,13 @@ module.exports = env => {
     }
 
     const patternsSrcDir = __dirname + "/src/patterns";
-    const patternsSnippets = readdirSync(patternsSrcDir).map(entryName => {
+    /*const patternsSnippets = readdirSync(patternsSrcDir).map(entryName => {
         return new HtmlWebpackPlugin({
             filename: "patterns/snippets/" + entryName + '.html',
             template: patternsSrcDir + `/${entryName}/${entryName}.twig`,
             inject: false
         });
-    });
+    });*/
 
     const patternsDocs = readdirSync(patternsSrcDir).map(entryName => {
         return new HtmlWebpackPlugin({
@@ -129,9 +130,12 @@ module.exports = env => {
             }),
             new webpack.WatchIgnorePlugin([
                 path.join(__dirname, "node_modules")
-            ])
+            ]),
+            new CopyPlugin([
+                { from: 'src/public', to: 'public' },
+            ]),
         ]
-            .concat(patternsSnippets)
+           // .concat(patternsSnippets)
             .concat(patternsDocs)
             .concat(indexHtml)
     }

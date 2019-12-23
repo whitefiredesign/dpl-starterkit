@@ -1,11 +1,11 @@
 {
-  "name": "starter-dpl",
+  "name": "fmg-digital-pattern-library",
   "version": "0.0.1",
-  "description": "Digital Pattern Library",
+  "description": "Digital Pattern Library for France Media Group digital products.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/whitefiredesign/dpl-starterkit"
+    "url": "https://github.com/France-Media-Group/digital-pattern-library.git"
   },
   "scripts": {
     "stylesheet-build": "node functions/build/stylesheet.js",
@@ -17,25 +17,32 @@
   "author": "Joe Buckle",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.7.4",
+    "@babel/core": "^7.7.5",
     "@babel/plugin-syntax-dynamic-import": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-env": "^7.7.6",
     "babel-loader": "^8.0.6",
+    "copy-webpack-plugin": "^5.1.1",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.13.0",
+    "resolve-url-loader": "^3.1.1",
     "sass-loader": "^8.0.0",
     "twig-html-loader": "^0.1.7",
-    "webpack": "^4.41.2",
+    "webpack": "^4.41.3",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
     "clean-webpack-plugin": "^3.0.0",
-    "css-loader": "^3.2.0",
+    "css-loader": "^3.3.2",
+    "highlight.js": "^9.17.1",
+    "html-formatter": "^0.1.9",
+    "jquery": "^3.4.1",
+    "lazyload": "^2.0.0-rc.2",
     "node-sass-json-importer": "^4.1.0",
     "path": "^0.12.7",
     "raw-loader": "^3.1.0",
+    "sanitize.css": "^11.0.0",
     "sprintf-js": "^1.1.2",
     "style-loader": "^1.0.0",
     "yargs": "^15.0.2"
